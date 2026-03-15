@@ -26,4 +26,12 @@ db = SQLAlchemy(app)
 login = LoginManager(app)
 login.login_view = 'login'
 
+
+# IMPORTANT: Flask-Login user loader
+@login.user_loader
+def load_user(id):
+    from FlaskWebProject.models import User
+    return User.query.get(int(id))
+
+
 import FlaskWebProject.views
