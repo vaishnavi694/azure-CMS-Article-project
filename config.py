@@ -21,9 +21,10 @@ class Config(object):
     # Note: Azure App Service Linux uses 'ODBC Driver 17 for SQL Server' or 'ODBC Driver 18 for SQL Server'
     if SQL_USER_NAME and SQL_PASSWORD:
         SQLALCHEMY_DATABASE_URI = (
-            f"mssql+pyodbc://{SQL_USER_NAME}:{SQL_PASSWORD}@{SQL_SERVER}:1433/{SQL_DATABASE}"
-            "?driver=ODBC+Driver+17+for+SQL+Server"
-        )
+    f"mssql+pyodbc://{SQL_USER_NAME}:{SQL_PASSWORD}@{SQL_SERVER}:1433/{SQL_DATABASE}"
+    "?driver=ODBC+Driver+17+for+SQL+Server&Encrypt=yes&TrustServerCertificate=yes"
+)
+
     else:
         # Fallback to local SQLite if environment variables are missing
         SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
